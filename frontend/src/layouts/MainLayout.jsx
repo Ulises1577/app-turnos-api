@@ -2,7 +2,10 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 
-export default function MainLayout() {
+export default function MainLayout({ 
+    children,  
+}) {
+
     return <div 
     style={{ 
         minHeight: '100vh',
@@ -24,7 +27,7 @@ export default function MainLayout() {
                 backgroundColor: 'lightgreen',
                 flex: 1,}}>
 
-                Content goes here
+                {children}
             </main>
         </div>
         <Footer/>
