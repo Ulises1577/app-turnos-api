@@ -3,6 +3,7 @@ import About from './pages/About';
 import MainLayout from './layouts/MainLayout';
 import { Outlet } from 'react-router-dom';
 import NotFound from './pages/NotFound';
+import Login from './pages/Login';
 
 const routes = [
     {
@@ -18,6 +19,10 @@ const routes = [
             {
                 path: '/about',
                 element: <About />,
+            },
+            {
+                path: '/login',
+                element: <Login />,
             },
             {
                 path: '*',

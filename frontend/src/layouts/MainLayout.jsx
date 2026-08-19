@@ -11,7 +11,7 @@ export default function MainLayout({
         minHeight: '100vh',
         flexDirection: 'column',
         display: 'flex',
-    }}> 
+    }}> t About from './pages/About';
         <Header />
 
         <div className="body"
