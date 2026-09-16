@@ -1,0 +1,62 @@
+import { useState } from "react";
+import Form from '../components/Form';
+import TextField from '../components/TextField';
+import SecretField from '../components/SecretField';
+import SelectField from '../components/SelectField';
+
+export default function User() {
+    const [data, setData] = useState({
+        username: '',
+        displayName: '',
+        email: '',
+        password: '',
+        role: 'user',
+    });
+
+    function submitHandler(e) {
+        e.preventDefault();
+        console.log(data);
+    }
+
+    return <Form
+        title="Agregar Usuario"
+        onSubmit={submitHandler}
+    >
+        <TextField 
+        label="Nombre de usuario: "
+        value={data.username}
+        onChange={newValue => setData(data => ({ ...data, username: newValue}))}
+        />
+
+        <TextField
+        label="Nombre completo: "
+        value={data.displayName}
+        onChange={newValue => setData(data => ({ ...data, displayName: newValue}))}
+        />
+
+        <TextField
+        label="Correo Electrónico: "
+        value={data.email}
+        onChange={newValue => setData(data => ({ ...data, email: newValue }))}
+        />
+
+        <SecretField 
+        label="Contraseña"
+        value={data.password}
+        onChange={newValue => setData(data => ({ ...data, password: newValue }))}
+        />
+
+        <SelectField
+        label="Role: : "
+        value={data.role}
+        onChange={newValue => setData(data => ({ ...data, role: newValue }))}
+        options = {[
+            {value: 'user', label: 'Usuario'},
+            {value: 'admin', label: 'Administrador'},
+        ]}
+        />
+
+
+
+    </Form> 
+}

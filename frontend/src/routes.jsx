@@ -4,6 +4,7 @@ import MainLayout from './layouts/MainLayout';
 import { Outlet } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
+import User from './pages/User';
 
 const routes = [
     {
@@ -23,6 +24,10 @@ const routes = [
             {
                 path: '/login',
                 element: <Login />,
+            },
+            {
+                path: '/user',
+                element: <User />,
             },
             {
                 path: '*',
