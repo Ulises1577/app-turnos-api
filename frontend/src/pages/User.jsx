@@ -15,6 +15,11 @@ export default function User() {
 
     function submitHandler(e) {
         e.preventDefault();
+
+        if (!data.email.includes('@')) {
+            alert('El correo electrónico no es válido');
+            return; //Hacer esta validacion es util tanto en el backend como en el frontend
+        }
         console.log(data);
     }
 
