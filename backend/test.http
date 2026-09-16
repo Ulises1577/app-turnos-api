@@ -1,0 +1,88 @@
+### 1. LOGIN DE ADMINISTRADOR
+# @name loginAdmin
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username": "nuevo_usuario_1",
+    "password": "clave-del-nuevo"
+}
+
+###
+
+### 2. CREAR NUEVO USUARIO (Usando el token del Login)
+POST http://localhost:3000/users
+Content-Type: application/json
+Authorizatization: {{loginAdmin.response.headers.Authorization}}
+
+{
+    "username": "nuevo_usuario_6",
+    "email": "nuevo@correo.com",
+    "password": "clave-del-nuevo",
+    "role": "user"
+}
+
+
+### VER LISTA DE USUARIOS (Usa el token dinámico del paso anterior para la autorización)
+GET http://localhost:3000/users
+Authorization: {{loginAdmin.response.headers.Authorization}}
+
+###
+PATCH http://localhost:3000/users/nuevo_usuario_5
+Content-Type: application/json
+Authorization: {{loginAdmin.response.headers.Authorization}}
+
+{
+    "username": "ulises_BORRAR",
+    "email": "ulises_usuario10@correo.com"
+}
+
+###
+DELETE http://localhost:3000/users/ulises_BORRAR
+Authorization: {{loginAdmin.response.headers.Authorization}}
+
+
+
+
+### CREAR TURNO PRUEBAS 1
+POST http://localhost:3000/appointments
+Content-Type: application/json
+Authorization: {{loginAdmin.response.headers.Authorization}}
+
+{ 
+    "clientName": "Luciano",
+    "clientEmail": "lucianoApp@correo.com",
+    "date": "2026-10-10T19:30:00.000Z", 
+    "service": "Barba"
+}
+
+### CREAR TURNO PRUEBAS 2
+POST http://localhost:3000/appointments
+Content-Type: application/json
+Authorization: {{loginAdmin.response.headers.Authorization}}
+
+{ 
+    "clientName": "Ulises",
+    "clientEmail": "ulises@correo.com",
+    "date": "2026-10-10T19:30:00.000Z", 
+    "service": "Corte de pelo"
+}
+
+### VER TODOS LOS TURNOS
+GET http://localhost:3000/appointments
+Authorization: {{loginAdmin.response.headers.Authorization}}
+
+
+### CAMBIAR ESTADO DE UN TURNO
+PATCH http://localhost:3000/appointments/6a74e6c5c4255f982f2f3e91/status
+Content-Type: application/json
+Authorization: {{loginAdmin.response.headers.Authorization}}
+
+{
+    "status": "confirmed"
+}
+
+### BORRAR UN TURNO
+DELETE http://localhost:3000/appointments/6a74e6c5c4255f982f2f3e91
+Authorization: {{loginAdmin.response.headers.Authorization}}
+
