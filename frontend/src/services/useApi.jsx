@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 export default function useApi() {
     const [urlBase, /*setUrlBase*/ ] = useState('http://localhost:3000/api');
+    const [authorization, setAuthorization] = useState('');
 
     async function request(url, options = {}) {
         options = { ...options };
@@ -22,6 +23,11 @@ export default function useApi() {
         if (options.json) {
             options.headers['Accept'] = 'application/json';
         }
+
+        if (authorization) {
+            options.headers ??= {};
+            options.headers['Authorization'] = authorization;
+        } 
 
         const res = await fetch(urlBase + url, {
             ...options,
@@ -94,5 +100,7 @@ export default function useApi() {
         postJson,
         patchJson,
         deleteJson,
+        authorization,
+        setAuthorization,
     };
 }

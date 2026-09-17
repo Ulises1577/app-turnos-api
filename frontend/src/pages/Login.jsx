@@ -4,10 +4,12 @@ import Form from '../components/Form';
 import TextField from '../components/TextField';
 import SecretField from '../components/SecretField';
 import useLogin from '../services/useLogin.jsx';    
+import useApi from '../services/useApi.jsx';
 
 export default function Login() {
     const navigate = useNavigate();
     const { login } = useLogin();
+    const { setAuthorization } = useApi();
     const [data, setData] = useState({
         username: '',
         password: '',
@@ -22,21 +24,13 @@ export default function Login() {
 
         try {
             const res = await login(data);
-            if (res.token) {
-                localStorage.setItem('token', res.token);
-            }
-            if (res.username) {
-                localStorage.setItem('user', JSON.stringify(res));
-            }
-            navigate('/');
-        } catch (err) {
-            setError(err.message);
-            console.error('Error al iniciar sesión:', err.message);
-        } finally {
-            setLoading(false);
+            console.log(res.authorizationToken);
+            setAuthorization(`Bearer` + res.authorizationToken);
+            alert('Inicio de sesión exitoso');
+        } catch (error) {
+            alert('Error en el login.');
         }
     }
-
     function cancelHandler() {
         navigate('/');
     }
