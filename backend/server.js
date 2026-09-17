@@ -10,9 +10,12 @@ import cors from 'cors';
 const app = express();
 
 app.use(express.json());
-app.use(cors()); //Habilitamos el CORS para que el frontend pueda hacer peticiones al backend
+app.use(cors({
+    exposedHeaders: ['Authorization']
+})); //Habilitamos el CORS para que el frontend pueda hacer peticiones al backend y leer headers
 app.use(logMiddleware); //Registramos la peticion chango        
-app.use('/', apiRouter); //Pues la rutas
+app.use('/api', apiRouter); //Rutas con prefijo /api
+app.use('/', apiRouter); //Compatibilidad con rutas directas
 app.use(errorMiddleware); //Registramos los erroress
 
 async function StartServer() {

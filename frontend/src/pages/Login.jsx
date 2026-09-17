@@ -12,34 +12,59 @@ export default function Login() {
         username: '',
         password: '',
     });
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     async function submitHandler(e) {
-        e.preventDefault(); //Es un formulario va a recargar la pagina, esto es para que no lo haga
-        const res = await login(data);
-        console.log(res);
+        e.preventDefault();
+        setError('');
+        setLoading(true);
+
+        try {
+            const res = await login(data);
+            if (res.token) {
+                localStorage.setItem('token', res.token);
+            }
+            if (res.username) {
+                localStorage.setItem('user', JSON.stringify(res));
+            }
+            navigate('/');
+        } catch (err) {
+            setError(err.message);
+            console.error('Error al iniciar sesión:', err.message);
+        } finally {
+            setLoading(false);
+        }
     }
 
     function cancelHandler() {
         navigate('/');
     }
-    return <Form
-    title="Login" 
-    onSubmit={submitHandler}
-    submitLabel="Iniciar sesión"
-    onCancel={cancelHandler}
-    >
-    
+
+    return (
+        <Form
+            title="Login" 
+            onSubmit={submitHandler}
+            submitLabel={loading ? "Iniciando sesión..." : "Iniciar sesión"}
+            onCancel={cancelHandler}
+        >
+            {error && (
+                <div style={{ color: 'red', marginBottom: '10px', fontWeight: 'bold' }}>
+                    {error}
+                </div>
+            )}
             <TextField 
-            label="Nombre de usuario: "
-            value= {data.username}
-            onChange={newValue => setData(data => ({ ...data, username: newValue }))} 
-            required
+                label="Nombre de usuario: "
+                value={data.username}
+                onChange={newValue => setData(data => ({ ...data, username: newValue }))} 
+                required
             />
             <SecretField
-            label="Contraseña: "
-            value={data.password}
-            onChange={newValue => setData(data => ({ ...data, password: newValue}))}
-            required
+                label="Contraseña: "
+                value={data.password}
+                onChange={newValue => setData(data => ({ ...data, password: newValue }))}
+                required
             /> 
-        </Form>;
+        </Form>
+    );
 }

@@ -13,9 +13,20 @@ loginRouter.post('/', async (req, res, next) => {
 
         res.status(200).json({
             username: login.username,
-            role: login.role
+            role: login.role,
+            token: login.authorizationToken
         });
     } catch (error) {
+        if (
+            error.message === 'Nombre de usuario y contraseña son obligatorios.' ||
+            error.message === 'Usuario no encontrado.' ||
+            error.message === 'Contraseña incorrecta.'
+        ) {
+            return res.status(401).json({
+                status: "error",
+                message: error.message
+            });
+        }
         next(error);
     }
 });
