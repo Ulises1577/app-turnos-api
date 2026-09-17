@@ -4,8 +4,8 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "username": "nuevo_usuario_1",
-    "password": "clave-del-nuevo"
+    "username": "admin",
+    "password": "admin"
 }
 
 ###
