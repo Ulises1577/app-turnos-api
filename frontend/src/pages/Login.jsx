@@ -3,17 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import Form from '../components/Form';
 import TextField from '../components/TextField';
 import SecretField from '../components/SecretField';
+import useLogin from '../services/useLogin.jsx';    
 
 export default function Login() {
     const navigate = useNavigate();
+    const { login } = useLogin();
     const [data, setData] = useState({
         username: '',
         password: '',
     });
 
-    function submitHandler(e) {
+    async function submitHandler(e) {
         e.preventDefault(); //Es un formulario va a recargar la pagina, esto es para que no lo haga
-        console.log(data);
+        const res = await login(data);
+        console.log(res);
     }
 
     function cancelHandler() {
