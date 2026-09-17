@@ -13,7 +13,7 @@ Content-Type: application/json
 ### 2. CREAR NUEVO USUARIO (Usando el token del Login)
 POST http://localhost:3000/users
 Content-Type: application/json
-Authorizatization: {{loginAdmin.response.headers.Authorization}}
+Authorization: {{loginAdmin.response.headers.Authorization}}
 
 {
     "username": "nuevo_usuario_6",

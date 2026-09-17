@@ -25,7 +25,9 @@ userRouter.get('/',
 );
 
 //GET INDIVIDUAL (Por username)
-userRouter.get('/:username', checkRoleMiddleware(['admin']), 
+userRouter.get('/:username', 
+    checkAuthorizationTokenMiddleware, 
+    checkRoleMiddleware(['admin']), 
     async (req, res) => {
     try {
         const { username } = req.params;
@@ -33,11 +35,11 @@ userRouter.get('/:username', checkRoleMiddleware(['admin']),
         if (!user) {
             return res.status(404).json({ error: "Usuario no encontrado" });
         }
-        res.status(200).json(user.map(user => ({
+        res.status(200).json({
             username: user.username,
             email: user.email,
             role: user.role
-        }))); 
+        }); 
     } catch (error) {
         res.status(500).json({ error: 'Error al buscar el usuario', details: error.message });
     }
@@ -74,7 +76,7 @@ userRouter.patch('/:username',checkAuthorizationTokenMiddleware ,checkRoleMiddle
             role: updatedUser.role
         });
     } catch (error) {
-        res.status(500).json({ error: "Error al crear usuario" , details: error.message });
+        res.status(500).json({ error: "Error al modificar usuario" , details: error.message });
     }
 });
 

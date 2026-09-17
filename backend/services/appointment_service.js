@@ -25,7 +25,7 @@ export class AppointmentService {
     async changeStatus(id, status) {
         const validStatuses = ['pending', 'confirmed', 'completed', 'cancelled'];
         if (!validStatuses.includes(status)) {
-            throw new Error('El estado "${status}" no es valido');
+            throw new Error(`El estado "${status}" no es valido`);
         }
 
         return await this.appointmentModel.findByIdAndUpdate(
