@@ -13,3 +13,24 @@
 .field label {
     text-align: right;
 }
+
+.form-buttons {
+    text-align: right;
+}
+
+input[type="button"], input[type="submit"] {
+    padding: .35em .8em;
+    margin: .5em;
+    border: .025em solid gray;
+    border-radius: .5em;
+}
+
+input[type="submit"] {
+    background-color: #a9ecbd;
+    border-color: green;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover {
+    background-color: lightblue;
+    transition: .35s;
+}

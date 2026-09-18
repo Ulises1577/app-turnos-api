@@ -5,11 +5,13 @@ import TextField from '../components/TextField';
 import SecretField from '../components/SecretField';
 import useLogin from '../services/useLogin.jsx';    
 import useApi from '../services/useApi.jsx';
+import { set } from 'mongoose';
 
 export default function Login() {
     const navigate = useNavigate();
     const { login } = useLogin();
     const { setAuthorization } = useApi();
+    const [disabled, setDisabled] = useState(false);
     const [data, setData] = useState({
         username: '',
         password: '',
@@ -21,6 +23,7 @@ export default function Login() {
         e.preventDefault();
         setError('');
         setLoading(true);
+        setDisabled(true);
 
         try {
             const res = await login(data);
@@ -31,6 +34,8 @@ export default function Login() {
             console.error('Error en el login:', error);
             alert('Error en el login.');
         }
+
+        setDisabled(false);
     }
     function cancelHandler() {
         navigate('/');
@@ -42,6 +47,7 @@ export default function Login() {
             onSubmit={submitHandler}
             submitLabel={loading ? "Iniciando sesión..." : "Iniciar sesión"}
             onCancel={cancelHandler}
+            disabled={disabled || loading}
         >
             {error && (
                 <div style={{ color: 'red', marginBottom: '10px', fontWeight: 'bold' }}>
@@ -53,12 +59,14 @@ export default function Login() {
                 value={data.username}
                 onChange={newValue => setData(data => ({ ...data, username: newValue }))} 
                 required
+                disabled={disabled}
             />
             <SecretField
                 label="Contraseña: "
                 value={data.password}
                 onChange={newValue => setData(data => ({ ...data, password: newValue }))}
                 required
+                disabled={disabled}
             /> 
         </Form>
     );
