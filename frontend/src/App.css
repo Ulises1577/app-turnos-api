@@ -1,0 +1,15 @@
+.field {
+    background-color: lightblue;
+    margin: .25em;
+    padding: .5em;
+    display: flex;
+    border: .02em solid gray;
+    border-radius: .5em;
+}
+.field * {
+    flex: 1;
+}
+
+.field label {
+    text-align: right;
+}

@@ -28,6 +28,7 @@ export default function Login() {
             setAuthorization(`Bearer` + res.authorizationToken);
             alert('Inicio de sesión exitoso');
         } catch (error) {
+            console.error('Error en el login:', error);
             alert('Error en el login.');
         }
     }

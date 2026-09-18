@@ -3,7 +3,8 @@ export default function Field({
     children,
     required = false
 }) {
-    return <div>
+    return <div
+        class="field">
         <label>     
             {required && <span style={{ color: 'red'}} title="Este dato es obligatorio"> * </span>}
             {label}
