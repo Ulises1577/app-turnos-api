@@ -12,6 +12,6 @@ export default function Menu({
         <MenuItem to="/"> Inicio </MenuItem>
         <MenuItem to="/login"> Login </MenuItem>
         <MenuItem to="/about"> Acerca de </MenuItem>
-        <MenuItem to="/user"> Agregar usuario </MenuItem> 
+        <MenuItem to="/users"> Usuarios </MenuItem> 
     </nav>;
 }

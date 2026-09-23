@@ -10,11 +10,6 @@ export function ApiProvider({ children }) {
     options = { ...options };
     options.headers = { ...options.headers };
 
-    const token = localStorage.getItem('token');
-    if (token && !options.headers['Authorization']) {
-        options.headers['Authorization'] = `Bearer ${token}`;
-    }
-
     if (options.body) {
         if (typeof options.body !== 'string') {
             options.body = JSON.stringify(options.body);
@@ -60,8 +55,12 @@ export function ApiProvider({ children }) {
     return await request(url, { method: 'GET' });
     }
 
-    async function getJson(url) {
-    return await request(url, { method: 'GET', json: true });
+    async function getJson(url, options = {}) {
+    return await request(url, { 
+        method: 'GET', 
+        json: true, 
+        ...options 
+    });
     }
 
     async function post(url, body) {

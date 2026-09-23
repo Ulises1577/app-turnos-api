@@ -27,6 +27,8 @@ Authorization: {{loginAdmin.response.headers.Authorization}}
 GET http://localhost:3000/users
 Authorization: {{loginAdmin.response.headers.Authorization}}
 
+
+
 ###
 PATCH http://localhost:3000/users/nuevo_usuario_5
 Content-Type: application/json
@@ -85,4 +87,3 @@ Authorization: {{loginAdmin.response.headers.Authorization}}
 ### BORRAR UN TURNO
 DELETE http://localhost:3000/appointments/6a74e6c5c4255f982f2f3e91
 Authorization: {{loginAdmin.response.headers.Authorization}}
-

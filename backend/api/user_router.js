@@ -15,6 +15,7 @@ userRouter.get('/',
         const users = await userService.getAllUsers();
         res.status(200).json(users.map(user => ({
             username: user.username,
+            displayName: user.displayName,
             email: user.email,
             role: user.role
         })));
@@ -37,6 +38,7 @@ userRouter.get('/:username',
         }
         res.status(200).json({
             username: user.username,
+            displayName: user.displayName,
             email: user.email,
             role: user.role
         }); 
@@ -52,6 +54,7 @@ userRouter.post('/',checkAuthorizationTokenMiddleware ,checkRoleMiddleware(['adm
         const newUser = await userService.createUser(req.body);
         res.status(201).json({
             username: newUser.username,
+            displayName: newUser.displayName,
             email: newUser.email,
             role: newUser.role
         });
@@ -72,6 +75,7 @@ userRouter.patch('/:username',checkAuthorizationTokenMiddleware ,checkRoleMiddle
         }
         res.status(200).json({
             username: updatedUser.username,
+            displayName: updatedUser.displayName,
             email: updatedUser.email,
             role: updatedUser.role
         });
