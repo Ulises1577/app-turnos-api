@@ -34,3 +34,28 @@ input[type="button"]:hover, input[type="submit"]:hover {
     background-color: lightblue;
     transition: .35s;
 }
+
+.data-table {
+    width: 100%;
+    border: .02em solid gray;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+    border: .02em solid gray;
+    padding: .5em;
+    text-align: left;
+}
+
+.data-table tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.data-table tr:nth-child(even) {
+    background-color: lightblue;
+}
+
+.data-table tr:hover {
+    background-color: yellow;
+    transition: .35s;
+}
