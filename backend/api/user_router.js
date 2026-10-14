@@ -51,6 +51,7 @@ userRouter.get('/:username',
 userRouter.post('/',checkAuthorizationTokenMiddleware ,checkRoleMiddleware(['admin']), 
     async (req, res, next) => {
     try {
+        
         const newUser = await userService.createUser(req.body);
         res.status(201).json({
             username: newUser.username,
